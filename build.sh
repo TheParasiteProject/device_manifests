@@ -2,6 +2,7 @@
 #
 # Copyright (c) 2012, The Linux Foundation. All rights reserved.
 # Copyright (C) 2023, StatiXOS
+# Copyright (C) 2025, TheParasiteProject
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -49,9 +50,6 @@ OPTIONS:
 
 USAGE
 }
-
-# Set release
-RELEASE=ap2a
 
 clean_build() {
     echo -e "\nINFO: Removing entire out dir. . .\n"
@@ -145,10 +143,10 @@ fi
 case "$PKG" in
     "")
         PKG="bacon" ;;
-    "otapackage")
+    "bacon")
         PKG="bacon" ;;
-    "updatepackage")
-        PKG="updatepackage" ;;
+    "chips")
+        PKG="chips" ;;
     *)
         echo "Unknown package type! Bailing out!" && exit 1 ;;
 esac
@@ -184,7 +182,7 @@ else
     fi
 fi
 
-lunch statix_$TARGET-$RELEASE-$VARIANT || exit_on_error
+lunch lineage_$TARGET-$VARIANT || exit_on_error
 
 if [ "$CLEAN_BUILD" = "true" ]; then
     clean_build
