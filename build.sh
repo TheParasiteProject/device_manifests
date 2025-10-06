@@ -178,7 +178,7 @@ else
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/$TARGET.xml
         grep -E 'path="[^"]+"' device/manifests/$TARGET.xml | awk -F'"' '{print $2}' | xargs -I {} echo -n "{} " > .device-sync
-        repo sync $(cat .device-sync)
+        repo sync -c --force-sync --optimized-fetch --prune -j$JOBS $(cat .device-sync)
     fi
 fi
 
