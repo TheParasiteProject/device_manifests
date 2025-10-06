@@ -98,9 +98,17 @@ update_api() {
     m update-api | tee $LOG_FILE.log
 }
 
+if [ -f device/manifests/options.sh ]; then
+	source device/manifests/options.sh
+fi
+
 # Set defaults
-VARIANT="userdebug"
-JOBS=8
+if [ -z $VARIANT ]; then
+	VARIANT="userdebug"
+fi
+if [ -z $JOBS ]; then
+	JOBS=8
+fi
 
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,log_file:,module:,"
