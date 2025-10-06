@@ -164,24 +164,6 @@ fi
 
 source build/envsetup.sh
 
-if [ -d "device/*/$TARGET" ]; then
-    echo "Device tree found"
-else
-    echo "Checking if tree exists in manifests"
-    if test -f "device/manifests/$TARGET.xml"; then
-        echo "Syncing $TARGET trees"
-        # Clear older manifests
-        if ! [ -d .repo/local_manifests ]; then
-            mkdir -p .repo/local_manifests/
-        else
-            rm -rf .repo/local_manifests/$TARGET.xml
-        fi
-        cp device/manifests/$TARGET.xml .repo/local_manifests/$TARGET.xml
-        grep -E 'path="[^"]+"' device/manifests/$TARGET.xml | awk -F'"' '{print $2}' | xargs -I {} echo -n "{} " > .device-sync
-        repo sync -c --force-sync --optimized-fetch --prune -j$JOBS $(cat .device-sync)
-    fi
-fi
-
 lunch lineage_$TARGET-$VARIANT || exit_on_error
 
 if [ "$CLEAN_BUILD" = "true" ]; then
