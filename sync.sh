@@ -36,8 +36,14 @@ OPTIONS:
 USAGE
 }
 
+if [ -f device/manifests/options.sh ]; then
+	source device/manifests/options.sh
+fi
+
 # Set defaults
-JOBS=8
+if [ -z $JOBS ]; then
+	JOBS=8
+fi
 
 # Setup getopt.
 long_opts="help,shallow-sync,update-bins,update-pkgs,jobs:"
@@ -59,20 +65,22 @@ while true; do
     shift
 done
 
-# Mandatory argument
-if [ $# -eq 0 ]; then
-    echo -e "\nERROR: Missing mandatory argument: MANIFEST_URL and BRANCH\n"
-    usage
-    exit 1
-fi
-if [ $# -gt 2 ]; then
-    echo -e "\nERROR: Extra inputs. Need MANIFEST_URL and BRANCH only\n"
-    usage
-    exit 1
-fi
+if [[ -z $MANIFEST_URL || -z $BRANCH ]]; then
+	# Mandatory argument
+	if [ $# -eq 0 ]; then
+		echo -e "\nERROR: Missing mandatory argument: MANIFEST_URL and BRANCH\n"
+		usage
+		exit 1
+	fi
+	if [ $# -gt 2 ]; then
+		echo -e "\nERROR: Extra inputs. Need MANIFEST_URL and BRANCH only\n"
+		usage
+		exit 1
+	fi
 
-MANIFEST_URL="$1"; shift
-BRANCH="$1"; shift
+	MANIFEST_URL="$1"; shift
+	BRANCH="$1"; shift
+fi
 
 init_git_account() {
 	# check to see if git is configured, if not prompt user
