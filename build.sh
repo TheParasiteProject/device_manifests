@@ -174,7 +174,7 @@ else
         if ! [ -d .repo/local_manifests ]; then
             mkdir -p .repo/local_manifests/
         else
-            rm -rf .repo/local_manifests/*.xml
+            rm -rf .repo/local_manifests/$TARGET.xml
         fi
         cp device/manifests/$TARGET.xml .repo/local_manifests/$TARGET.xml
         grep -E 'path="[^"]+"' device/manifests/$TARGET.xml | awk -F'"' '{print $2}' | xargs -I {} echo -n "{} " > .device-sync
