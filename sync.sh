@@ -201,10 +201,10 @@ repo_sync() {
 }
 
 repo_update() {
-	cd .repo/repo
+	pushd ".repo/repo"
 	git fetch origin main || true
 	git pull origin main || true
-	cd ../../
+	popd
 }
 
 repo_reset() {
