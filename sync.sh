@@ -180,7 +180,7 @@ update_manifests() {
     else
 		rm -rf .repo/local_manifests/*.xml || true
 	fi
-    cp -rf device/manifests/*.xml .repo/local_manifests/ || true
+    cp -rf device/manifests/snippets/*.xml .repo/local_manifests/ || true
     cp -rf device/manifests/additional/*.xml .repo/local_manifests/ || true
 }
 
