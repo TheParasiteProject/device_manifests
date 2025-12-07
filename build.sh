@@ -103,6 +103,13 @@ if [ -f device/manifests/options.sh ]; then
 fi
 
 # Set defaults
+if [ -z $RELEASE ]; then
+	RELEASE=$(grep "BUILD_ID" build/make/core/build_id.mk \
+                | tail -1 \
+                | cut -d '=' -f 2 \
+                | cut -d '.' -f 1 \
+                | tr '[:upper:]' '[:lower:]')
+fi
 if [ -z $VARIANT ]; then
 	VARIANT="userdebug"
 fi
@@ -172,7 +179,7 @@ fi
 
 source build/envsetup.sh
 
-lunch lineage_$TARGET-$VARIANT || exit_on_error
+lunch "${TARGET}-${RELEASE}-${VARIANT}" || exit_on_error
 
 if [ "$CLEAN_BUILD" = "true" ]; then
     clean_build
