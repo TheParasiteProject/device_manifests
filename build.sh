@@ -37,7 +37,7 @@ OPTIONS:
         Log file to store build logs (Default: <TARGET_PRODUCT>.log)
 
     -m, --module
-        Module to be build
+        Module to be build - split by comma for multiple (foo,bar,qux)
 
     -p, --package-type
         Specifies package type to build (Default: otapackage)
@@ -77,8 +77,9 @@ build_usrimg() {
 }
 
 build_module() {
-    echo -e "\nINFO: Build $MODULE for $TARGET\n"
-    m $MODULE $@ | tee $LOG_FILE.log
+    local modules="${MODULE//,/ }"
+    echo -e "\nINFO: Build ${modules} for $TARGET\n"
+    m ${modules} $@ | tee $LOG_FILE.log
 }
 
 exit_on_error() {
