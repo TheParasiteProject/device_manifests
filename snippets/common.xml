@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <remote name="device-github"
-      fetch="git@github.com:TheParasiteProject-Staging"
+      fetch="https://github.com/TheParasiteProject/"
       revision="main" />
   
   <remote name="device-gitlab"
-      fetch="git@gitlab.com:TheParasiteProject-Staging"
+      fetch="https://gitlab.com/TheParasiteProject/"
       revision="main" />
 </manifest>
