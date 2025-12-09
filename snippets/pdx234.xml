@@ -6,6 +6,6 @@
   <project path="kernel/sony/sm8550-devicetrees" name="kernel_sony_sm8550-devicetrees" remote="device-github" />
   <project path="kernel/sony/sm8550-modules" name="kernel_sony_sm8550-modules" remote="device-github" />
   <project path="kernel/sony/sm8550" name="kernel_sony_sm8550" remote="device-github" />
-  <!-- <project path="vendor/sony/pdx234" name="vendor_sony_pdx234" remote="device-github" /> -->
-  <!-- <project path="vendor/sony/sm8550-common" name="vendor_sony_sm8550-common" remote="device-github" /> -->
+  <project path="vendor/sony/pdx234" name="vendor_sony_pdx234" remote="device-github" />
+  <project path="vendor/sony/sm8550-common" name="vendor_sony_sm8550-common" remote="device-github" />
 </manifest>
