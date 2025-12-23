@@ -144,6 +144,10 @@ while true; do
     shift
 done
 
+if [ "$UPDATE_API" = "true" ] || [ -n "$MODULE" ] || [ -n "$IMAGE" ]; then
+    BUILD_ANDROID="false"
+fi
+
 # Mandatory argument
 if [ $# -eq 0 ]; then
     echo -e "\nERROR: Missing mandatory argument: TARGET_PRODUCT\n"
@@ -198,4 +202,6 @@ if [ -n "$IMAGE" ]; then
     build_$IMAGE "$CMD"
 fi
 
-build_android "$PKG" "$CMD"
+if [ "$BUILD_ANDROID" != false ]; then
+    build_android "$PKG" "$CMD"
+fi
